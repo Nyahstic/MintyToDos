@@ -4,6 +4,8 @@
 **MintyToDos** is a simple and efficient command-line task manager built with C# for .NET.
 It allows you to create, list, delete, and modify your tasks easily from the terminal.
 
+Want to know how to use the program? [Click here](MintyToDos/how%20to%20use.md)
+
 ---
 
 ## Features
