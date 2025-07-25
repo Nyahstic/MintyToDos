@@ -471,6 +471,157 @@ static class Program
 
     private static void ShowHelp(ImmutableList<string> subcommands)
     {
-        Console.WriteLine("There's no help available, for now.");
+        if (subcommands.Count == 0)
+        {
+            Console.WriteLine("""
+                                              MintyToDos CLI - Task Manager
+
+                                              Usage:
+                                                  MintyToDos <command> [options]
+
+                                              Available commands:
+
+                                                  help, h
+                                                      Displays this help message.
+
+                                                  create, c <TaskName> -p <Priority> -d <Description>
+                                                      Creates a new task.
+                                                      Options:
+                                                          -p, --set-priority       Sets the task priority (integer)
+                                                          -d, --set-description    Sets the task description
+
+                                                  list, l [options]
+                                                      Lists all tasks, with optional sorting.
+                                                      Options:
+                                                          -p, --task-priority      Sort by priority
+                                                          -d, --task-completed     Show completed tasks first
+                                                          -w, --task-wip           Show in-progress tasks first
+                                                          -c, --task-canceled      Show canceled tasks first
+
+                                                  delete, d <TaskName>
+                                                      Deletes an existing task.
+
+                                                  change, ch <TaskName> [options]
+                                                      Modifies task details or status.
+                                                      Options:
+                                                          -D, --mark-as-done           Mark as done
+                                                          -c, --mark-as-canceled       Mark as canceled
+                                                          -d, --description <text>     Change description
+                                                          -n, --new-name <name>        Change task name
+
+                                              Examples:
+                                                  MintyToDos create "Drink Water" -p 1 -d "Stay hydrated"
+                                                  MintyToDos list -p
+                                                  MintyToDos change "Drink Water" -D
+
+                                              Version 1.0a
+                                          
+                              """);
+            return;
+        }
+
+        var command = subcommands[0].ToLower();
+        switch (command)
+        {
+            case "create":
+            case "c":
+                Console.WriteLine("""
+                                      Command: create (alias: c)
+                                      Creates a new task with a given name, priority, and description.
+
+                                      Usage:
+                                          MintyToDos create <TaskName> -p <Priority> -d <Description>
+
+                                      Options:
+                                          -p, --set-priority       Sets the task priority (integer)
+                                          -d, --set-description    Sets the task description
+
+                                      Example:
+                                          MintyToDos create "Write blog post" -p 2 -d "Explain async/await"
+                                      
+                                  """);
+                break;
+
+            case "list":
+            case "l":
+                Console.WriteLine("""
+                                      Command: list (alias: l)
+                                      Lists all existing tasks. You can sort/filter the list.
+
+                                      Usage:
+                                          MintyToDos list [options]
+
+                                      Options:
+                                          -p, --task-priority      Sort by priority
+                                          -d, --task-completed     Show completed tasks first
+                                          -w, --task-wip           Show tasks in progress first
+                                          -c, --task-canceled      Show canceled tasks first
+
+                                      Example:
+                                          MintyToDos list -d
+                                      
+                                  """);
+                break;
+
+            case "delete":
+            case "d":
+                Console.WriteLine("""
+                                      Command: delete (alias: d)
+                                      Deletes a task based on its name.
+
+                                      Usage:
+                                          MintyToDos delete <TaskName>
+
+                                      Example:
+                                          MintyToDos delete "Write blog post"
+                                      
+                                  """);
+                break;
+
+            case "change":
+            case "ch":
+                Console.WriteLine("""
+                                      Command: change (alias: ch)
+                                      Modifies a task’s name, description, or status.
+
+                                      Usage:
+                                          MintyToDos change <TaskName> [options]
+
+                                      Options:
+                                          -D, --mark-as-done           Marks the task as completed
+                                          -c, --mark-as-canceled       Marks the task as canceled
+                                              (if neither is provided, it's set to In Progress)
+                                          -d, --description <text>     Updates the task description
+                                          -n, --new-name <name>        Renames the task
+
+                                      Example:
+                                          MintyToDos change "Write blog post" -D
+                                          MintyToDos change "Write blog post" -n "Write tutorial" -d "Covers LINQ"
+                                      
+                                  """);
+                break;
+
+            case "help":
+            case "h":
+                Console.WriteLine("""
+                                      Command: help (alias: h)
+                                      Displays general help or command-specific help.
+
+                                      Usage:
+                                          MintyToDos help [command]
+
+                                      Example:
+                                          MintyToDos help list
+                                      
+                                  """);
+                break;
+
+            default:
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"Unknown help topic: {subcommands[0]}");
+                Console.ResetColor();
+                break;
+        }
     }
+
 }
