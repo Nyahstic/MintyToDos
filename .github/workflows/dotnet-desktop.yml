@@ -41,7 +41,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: MintyToDos-win-x64
+          name: MintyToDos-win-x86-64
           path: ./publish
 
       - name: Create GitHub Release
