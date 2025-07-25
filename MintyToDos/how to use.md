@@ -19,8 +19,8 @@ If no arguments are provided, it displays usage instructions.
 Displays general help or command-specific help.
 
 ```bash
-    MintyToDos help
-    MintyToDos help <command>
+  MintyToDos help
+  MintyToDos help <command>
 ```
 
 Examples:
